@@ -1,9 +1,42 @@
+# Wat
+
+Maybe a delegate is actually the way to go? It lets the program continue from where it was.
+Although this could also be done with a semaphore or something too, I guess.
+
 # TODO
 
 * Move config save out of JobProcessor.
 * Move Park at End out of JobProcessor.
 * Move stats out of JobProcessor.
 * Reconsider Signaler coupling with JobProcessor.
+
+# Operations and Options
+1. Initialize
+	Loads the job into the JobProcessor. No real errors here, unless the job is null, which
+	should never happen.
+
+2. Check Job
+	Performs a number of checks on the job file:
+	1. Each part has a height.
+	2. Each part has at least one valid feeder.
+	3. No duplicate reference designators.
+	4. No placements without an assigned part.
+	5. Each placement has at least one compatible nozzletip.
+	
+	Each of the above can throw an error.
+	
+3. Prep Machine
+	1. Safe Z the machine.
+	2. Discard any currently picked parts.
+	 
+4.  Fiducial Checks
+	
+
+5. Cleanup
+	1. Discard any currently picked parts.
+	2. Unload all nozzle tips.
+	3. Park the machine.
+
 
 # CHMT Notes
 
